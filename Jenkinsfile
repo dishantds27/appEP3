@@ -45,7 +45,6 @@ pipeline {
                 sh """
                     set -e
 
-                    # Kopieer bestanden naar app server
                     ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no \
                         "$DEPLOY_USER@$DEPLOY_HOST" \
                         "sudo mkdir -p $APP_DIR && sudo chown $DEPLOY_USER:$DEPLOY_USER $APP_DIR"
@@ -53,17 +52,11 @@ pipeline {
                     scp -i "$SSH_KEY" -o StrictHostKeyChecking=no -r \
                         ./publish/* "$DEPLOY_USER@$DEPLOY_HOST:$APP_DIR/"
 
-                    # Run database migrations
-                    ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no \
-                        "$DEPLOY_USER@$DEPLOY_HOST" \
-                        "cd $APP_DIR && dotnet-ef database update --connection 'Server=$DB_HOST;Database=$DB_NAME;User Id=sa;Password=$DB_PASSWORD;TrustServerCertificate=True;'"
-
-                    # Herstart de service
                     ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no \
                         "$DEPLOY_USER@$DEPLOY_HOST" \
                         "sudo systemctl restart $APP_SERVICE"
                 """
-            }
+         }
         }
     }
 
