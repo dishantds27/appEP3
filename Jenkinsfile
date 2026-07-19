@@ -33,8 +33,8 @@ pipeline {
             steps {
                 echo 'Publishing application...'
                 sh """
-                    dotnet publish --configuration Release \
-                        --output ./publish
+                    rm -rf ./publish
+                    dotnet publish DotNetCoreSqlDb/DotNetCoreSqlDb.csproj --configuration Release --output ./publish
                 """
             }
         }
