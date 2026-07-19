@@ -34,7 +34,7 @@ pipeline {
                 echo 'Publishing application...'
                 sh """
                     rm -rf ./publish
-                    dotnet publish DotNetCoreSqlDb/DotNetCoreSqlDb.csproj --configuration Release --output ./publish
+                    dotnet publish DotNetCoreSqlDb.csproj --configuration Release --output ./publish
                 """
             }
         }
