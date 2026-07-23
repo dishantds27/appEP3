@@ -44,6 +44,8 @@ pipeline {
                 echo 'Deploying to app server...'
                 sh """
                     set -e
+                    # oude know_hosts e,try verwijderen
+                    ssh-keygen -f "/var/lib/jenkins/.ssh/known_hosts" -R "$DEPLOY_HOST" || true
 
                     ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no \
                         "$DEPLOY_USER@$DEPLOY_HOST" \
