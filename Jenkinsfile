@@ -68,13 +68,16 @@ pipeline {
                 sh """
                     set -e
                     ssh-keygen -f "/var/lib/jenkins/.ssh/known_hosts" -R "$CLOUD_HOST" || true
-            
+
                     ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no \
                         "$CLOUD_USER@$CLOUD_HOST" \
                         "sudo mkdir -p $APP_DIR && sudo chown $CLOUD_USER:$CLOUD_USER $APP_DIR"
 
                     scp -i "$SSH_KEY" -o StrictHostKeyChecking=no -r \
                         ./publish/* "$CLOUD_USER@$CLOUD_HOST:$APP_DIR/"
+
+                    scp -i "$SSH_KEY" -o StrictHostKeyChecking=no \
+                        ./appsettings.Cloud.json "$CLOUD_USER@$CLOUD_HOST:$APP_DIR/appsettings.Production.json"
 
                     ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no \
                         "$CLOUD_USER@$CLOUD_HOST" \
