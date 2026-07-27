@@ -11,7 +11,6 @@ pipeline {
         DB_HOST = "192.168.56.11"
         DB_NAME = "ApplicationDB"
         DB_PASSWORD = "P@ssw0rd123!"
-        DEPLOY_USER = "vagrant"
         CLOUD_HOST = "92.5.131.89"
         CLOUD_USER = "ubuntu"
     }
