@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using DotNetCoreSqlDb.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add database context - SQLite for cloud, SQL Server for local
@@ -24,11 +25,17 @@ builder.Logging.AddAzureWebAppDiagnostics();
 
 var app = builder.Build();
 
+// Auto-migrate database bij opstarten
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<MyDatabaseContext>();
+    db.Database.Migrate();
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
