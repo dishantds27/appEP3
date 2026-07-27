@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using DotNetCoreSqlDb.Data;
+using System.Threading;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,14 +30,27 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<MyDatabaseContext>();
-    var connectionString2 = builder.Configuration.GetConnectionString("MyDbConnection");
-    if (connectionString2 != null && connectionString2.StartsWith("Data Source="))
+    var connStr = builder.Configuration.GetConnectionString("MyDbConnection");
+    if (connStr != null && connStr.StartsWith("Data Source="))
     {
         db.Database.EnsureCreated();
     }
     else
     {
-        db.Database.Migrate();
+        var retries = 5;
+        while (retries > 0)
+        {
+            try
+            {
+                db.Database.Migrate();
+                break;
+            }
+            catch
+            {
+                retries--;
+                Thread.Sleep(5000);
+            }
+        }
     }
 }
 
