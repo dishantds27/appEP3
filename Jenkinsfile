@@ -72,7 +72,7 @@ pipeline {
                     ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no \
                         "$CLOUD_USER@$CLOUD_HOST" \
                         "sudo mkdir -p $APP_DIR && sudo chown $CLOUD_USER:$CLOUD_USER $APP_DIR"
-                        
+
                     ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no \
                         "$CLOUD_USER@$CLOUD_HOST" \
                         "sudo chmod -R 775 $APP_DIR && sudo chown -R $CLOUD_USER:$CLOUD_USER $APP_DIR && sudo sed -i 's/User=www-data/User=$CLOUD_USER/' /etc/systemd/system/dotnetapp.service && sudo systemctl daemon-reload"
@@ -85,7 +85,7 @@ pipeline {
 
                     ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no \
                         "$CLOUD_USER@$CLOUD_HOST" \
-                        "sudo systemctl restart $APP_SERVICE"
+                        "sudo rm -f $APP_DIR/app.db && sudo systemctl restart $APP_SERVICE"
                 """
             }
         }
