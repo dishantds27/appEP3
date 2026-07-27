@@ -29,7 +29,15 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<MyDatabaseContext>();
-    db.Database.Migrate();
+    var connectionString2 = builder.Configuration.GetConnectionString("MyDbConnection");
+    if (connectionString2 != null && connectionString2.StartsWith("Data Source="))
+    {
+        db.Database.EnsureCreated();
+    }
+    else
+    {
+        db.Database.Migrate();
+    }
 }
 
 // Configure the HTTP request pipeline.
