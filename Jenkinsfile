@@ -11,6 +11,9 @@ pipeline {
         DB_HOST = "192.168.56.11"
         DB_NAME = "ApplicationDB"
         DB_PASSWORD = "P@ssw0rd123!"
+        DEPLOY_USER = "vagrant"
+        CLOUD_HOST = "92.5.131.89"
+        CLOUD_USER = "ubuntu"
     }
 
     stages {
@@ -59,6 +62,26 @@ pipeline {
                         "sudo systemctl restart $APP_SERVICE"
                 """
          }
+        }
+        stage('Deploy Cloud') {
+            steps {
+                echo 'Deploying to cloud app server...'
+                sh """
+                    set -e
+                    ssh-keygen -f "/var/lib/jenkins/.ssh/known_hosts" -R "$CLOUD_HOST" || true
+            
+                    ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no \
+                        "$CLOUD_USER@$CLOUD_HOST" \
+                        "sudo mkdir -p $APP_DIR && sudo chown $CLOUD_USER:$CLOUD_USER $APP_DIR"
+
+                    scp -i "$SSH_KEY" -o StrictHostKeyChecking=no -r \
+                        ./publish/* "$CLOUD_USER@$CLOUD_HOST:$APP_DIR/"
+
+                    ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no \
+                        "$CLOUD_USER@$CLOUD_HOST" \
+                        "sudo systemctl restart $APP_SERVICE"
+                """
+            }
         }
     }
 
