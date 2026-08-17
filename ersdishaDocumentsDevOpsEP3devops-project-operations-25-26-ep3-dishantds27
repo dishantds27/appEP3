@@ -1,0 +1,58 @@
+2026-07-31 demo: achtergrondkleur gewijzigd naar bruin
+2026-07-30 demo: achtergrondkleur gewijzigd naar groen
+2026-07-27 fix: logica voor database migrations bij opstarten
+2026-07-27 fix: SQLite database verwijderen voor herstart op cloud
+2026-07-27 fix; rechten
+2026-07-27 fix: EnsureCreated voor SQLite, Migrate voor SQL Server
+2026-07-27 fix: automatische database migrations bij opstarten
+2026-07-27  SQLite voor cloud, appsettings.Cloud.json toegevoegd
+2026-07-27 dubbel deploy_user
+2026-07-27 cloud deploy stage toegevoegd
+2026-07-23 fix: known_hosts automatisch opschonen voor deploy
+2026-07-22 fix: connectiestring naar AppDB zonder speciale tekens
+2026-07-19 fix: wachtwoord zonder speciale tekens
+2026-07-19 fix: correct pad naar csproj
+2026-07-19 fix: publish map opschonen voor nieuwe publish
+2026-07-19 wachtwoord zonder uitroepteken
+2026-07-19 fix: connectiestring naar SQL Server op db01
+2026-07-19 fix: database context registratie voor alle environments
+2026-07-18 fix: migration stap verwijderd uit deploy, service restart
+2026-07-17 Jenkinsfile toegevoegd voor CI/CD pipeline
+2026-07-07 appV1
+2026-05-20 devcontainer: drop stale Yarn apt source so feature installs succeed
+2026-05-20 chore(devcontainer): add azure-cli feature for live-test compatibility
+2026-05-20 Merge pull request #103 from Azure-Samples/copilot/add-sshd-feature
+2026-05-20 chore(devcontainer): add sshd feature
+2026-05-20 Initial plan
+2024-06-28 Remove infra files
+2024-06-28 add migrations info
+2024-06-27 run migrations based on environment
+2024-06-27 add azd files
+2024-06-24 add csdevkit and copilot extensions
+2024-06-24 add .devcontainer files
+2024-06-24 open in VSC on macos
+2024-06-24 Upgrade to 8.0 template and remove top project folder
+2023-05-24 Merge pull request #36 from Azure-Samples/addcache
+2023-05-09 move README
+2023-05-09 update to .NET 7.0 and add processing time
+2023-04-26 remove redundant dotnet restore step
+2023-04-26 ensure nuget packages can be restored
+2023-04-26 adding cache to the code
+2023-04-26 change connection string name & add migration bundle
+2023-04-26 Add or update the Azure App Service build and deployment workflow config
+2022-12-21 Merge pull request #18 from Azure-Samples/dev
+2022-12-19 add migration files
+2022-03-04 removed folder
+2022-03-04 fix file
+2022-03-04 added top level solution file
+2022-02-09 Update appsettings.json
+2022-01-07 test
+2022-01-07 Initial commit
+2022-01-07 .github/PULL_REQUEST_TEMPLATE.md committed
+2022-01-07 .github/ISSUE_TEMPLATE.md committed
+2022-01-07 .github/CODE_OF_CONDUCT.md committed
+2022-01-07 README.md committed
+2022-01-07 CONTRIBUTING.md committed
+2022-01-07 LICENSE.md committed
+2022-01-07 CHANGELOG.md committed
+2022-01-07 Initial commit
