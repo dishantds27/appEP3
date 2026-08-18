@@ -85,7 +85,7 @@ pipeline {
 
                     ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no \
                         "$CLOUD_USER@$CLOUD_HOST" \
-                        "sudo rm -f $APP_DIR/app.db && sudo systemctl restart $APP_SERVICE"
+                        "sudo systemctl restart $APP_SERVICE"
                 """
             }
         }
